@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb04"
+  },
+  "rollNumber": 1,
+  "name": "Alice",
+  "age": 20,
+  "cgpa": 8.7
+},
+{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb06"
+  },
+  "rollNumber": 3,
+  "name": "Charlie",
+  "age": 19,
+  "cgpa": 9
+},
+{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb07"
+  },
+  "rollNumber": 4,
+  "name": "David",
+  "age": 22,
+  "cgpa": 8.2
+},
+{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb08"
+  },
+  "rollNumber": 4,
+  "name": "David",
+  "age": 22,
+  "cgpa": 8.2
+},
+{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb09"
+  },
+  "rollNumber": 5,
+  "name": "Eve",
+  "age": 20,
+  "cgpa": 8.1
+},
+{
+  "_id": {
+    "$oid": "69cab38b124d869f3eb8eb0a"
+  },
+  "rollNumber": 6,
+  "name": "Frank",
+  "age": 23,
+  "cgpa": 8
+}]

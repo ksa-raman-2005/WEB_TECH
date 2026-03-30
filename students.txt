@@ -1,0 +1,230 @@
+use University_DB
+switched to db University_DB
+//Create Database University_DB
+//use University_DB
+//Create Collection Students
+db.createCollection("students")
+//Insert Documents
+db.students.insertMany([
+  { rollNumber: 1, name: "Alice", age: 20, cgpa: 8.5 },
+  { rollNumber: 2, name: "Bob", age: 21, cgpa: 7.8 },
+  { rollNumber: 3, name: "Charlie", age: 19, cgpa: 9.0 }
+])
+//Insert one new student - David
+db.students.insertOne({
+  rollNumber: 4,
+  name: "David",
+  age: 22,
+  cgpa: 8.2
+})
+db.students.insertOne({ rollNumber: 4, name: "David", age: 22, cgpa: 8.2 })
+ 
+// Insert multiple students at once
+db.students.insertMany([
+  { rollNumber: 5, name: "Eve",   age: 20, cgpa: 7.9 },
+  { rollNumber: 6, name: "Frank", age: 23, cgpa: 8.0 }
+])
+ 
+
+// All students
+db.students.find()
+ 
+// Student named Alice
+db.students.find({ name: "Alice" })
+ 
+// Students older than 20
+db.students.find({ age: { $gt: 20 } })
+ 
+// Students with CGPA > 8.0
+db.students.find({ cgpa: { $gt: 8.0 } })
+ 
+// Students with CGPA between 7.5 and 9.0
+db.students.find({ cgpa: { $gte: 7.5, $lte: 9.0 } })
+ 
+// Update Alice's CGPA to 8.7
+db.students.updateOne(
+  { name: "Alice" },
+  { $set: { cgpa: 8.7 } }
+)
+ 
+// Increase CGPA by 0.2 for all students with CGPA < 8.0
+db.students.updateMany(
+  { cgpa: { $lt: 8.0 } },
+  { $inc: { cgpa: 0.2 } }
+)
+// Delete student named Bob
+db.students.deleteOne({ name: "Bob" })
+ 
+// Delete all students with CGPA < 7.5
+db.students.deleteMany({ cgpa: { $lt: 7.5 } })
+{
+  acknowledged: true,
+  deletedCount: 0
+}
+db.students.find()
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb04'),
+  rollNumber: 1,
+  name: 'Alice',
+  age: 20,
+  cgpa: 8.7
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb06'),
+  rollNumber: 3,
+  name: 'Charlie',
+  age: 19,
+  cgpa: 9
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb07'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb08'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb09'),
+  rollNumber: 5,
+  name: 'Eve',
+  age: 20,
+  cgpa: 8.1
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb0a'),
+  rollNumber: 6,
+  name: 'Frank',
+  age: 23,
+  cgpa: 8
+}
+db.students.find({ name: "Alice" })
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb04'),
+  rollNumber: 1,
+  name: 'Alice',
+  age: 20,
+  cgpa: 8.7
+}
+db.students.find({ age: { $gt: 20 } })
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb07'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb08'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb0a'),
+  rollNumber: 6,
+  name: 'Frank',
+  age: 23,
+  cgpa: 8
+}
+db.students.find({ cgpa: { $gt: 8.0 } })
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb04'),
+  rollNumber: 1,
+  name: 'Alice',
+  age: 20,
+  cgpa: 8.7
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb06'),
+  rollNumber: 3,
+  name: 'Charlie',
+  age: 19,
+  cgpa: 9
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb07'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb08'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb09'),
+  rollNumber: 5,
+  name: 'Eve',
+  age: 20,
+  cgpa: 8.1
+}
+db.students.find({ cgpa: { $gte: 7.5, $lte: 9.0 } })
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb04'),
+  rollNumber: 1,
+  name: 'Alice',
+  age: 20,
+  cgpa: 8.7
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb06'),
+  rollNumber: 3,
+  name: 'Charlie',
+  age: 19,
+  cgpa: 9
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb07'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb08'),
+  rollNumber: 4,
+  name: 'David',
+  age: 22,
+  cgpa: 8.2
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb09'),
+  rollNumber: 5,
+  name: 'Eve',
+  age: 20,
+  cgpa: 8.1
+}
+{
+  _id: ObjectId('69cab38b124d869f3eb8eb0a'),
+  rollNumber: 6,
+  name: 'Frank',
+  age: 23,
+  cgpa: 8
+}
+db.students.updateOne(
+  { name: "Alice" },
+  { $set: { cgpa: 8.7 } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.students.updateMany(
+  { cgpa: { $lt: 8.0 } },
+  { $inc: { cgpa: 0.2 } }
+)

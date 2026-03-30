@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX JSON Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            padding: 40px 20px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        
+        p.sub {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            padding: 11px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        #loadBtn {
+            background: #e94560;
+            color: white;
+        }
+        
+        #loadBtn:hover {
+            background: #c73652;
+        }
+        
+        #clearBtn {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        #clearBtn:hover {
+            background: #0f3460;
+        }
+        
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .cgpa span {
+            font-size: 0.8rem;
+            color: #aaa;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Data – AJAX JSON Fetch</h2>
+    <p class="sub">Data loaded dynamically from students.json using XMLHttpRequest</p>
+
+    <div class="controls">
+        <button id="loadBtn" onclick="loadData()">Load Data</button>
+        <button id="clearBtn" onclick="clearData()">Clear</button>
+    </div>
+
+    <p id="status">Click "Load Data" to fetch from JSON</p>
+    <div class="grid" id="output"></div>
+
+    <script>
+        function loadData() {
+            var stat = document.getElementById("status");
+            var out = document.getElementById("output");
+            stat.className = "";
+            stat.textContent = "Fetching data...";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "students.json", true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    var arr = data.students;
+                    stat.className = "ok";
+                    stat.textContent = "Loaded " + arr.length + " records successfully";
+                    out.innerHTML = "";
+                    arr.forEach(function(s) {
+                        var init = s.name.split(" ").map(function(w) {
+                            return w[0];
+                        }).join("");
+                        var card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML =
+                            '<div class="avatar">' + init + '</div>' +
+                            '<div class="name">' + s.name + '</div>' +
+                            '<div>' +
+                            '<span class="badge">' + s.branch + '</span>' +
+                            '<span class="badge">Year ' + s.year + '</span>' +
+                            '</div>' +
+                            '<div class="cgpa">' + s.cgpa + ' <span>/ 10 CGPA</span></div>';
+                        out.appendChild(card);
+                    });
+                } else {
+                    stat.className = "err";
+                    stat.textContent = "Error: " + xhr.status;
+                }
+            };
+
+            xhr.onerror = function() {
+                stat.className = "err";
+                stat.textContent = "Request failed. Run via a local server (e.g. VSCode Live Server).";
+            };
+
+            xhr.send();
+        }
+
+        function clearData() {
+            document.getElementById("output").innerHTML = "";
+            var stat = document.getElementById("status");
+            stat.className = "";
+            stat.textContent = "Cleared. Click Load Data to fetch again.";
+        }
+    </script>
+</body>
+
+</html>

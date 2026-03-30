@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Drag and Drop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            padding: 40px;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+        
+        p.sub {
+            text-align: center;
+            color: #888;
+            margin-bottom: 35px;
+        }
+        
+        .layout {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .item {
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: grab;
+            user-select: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .item:active {
+            cursor: grabbing;
+            opacity: 0.7;
+        }
+        
+        .item.dragging {
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Drag and Drop – HTML5</h2>
+    <p class="sub">Drag items between the lists</p>
+
+    <div class="layout">
+        <div class="zone" id="z1" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropIt(event)">
+            <h3>Available Tasks</h3>
+            <div class="item" draggable="true" id="i1" ondragstart="startDrag(event)">BOX-1 <span class="count"></span></div>
+            <div class="item" draggable="true" id="i2" ondragstart="startDrag(event)">BOX-2 <span class="count"></span></div>
+            <div class="item" draggable="true" id="i3" ondragstart="startDrag(event)">BOX-3 <span class="count"></span></div>
+            <div class="item" draggable="true" id="i4" ondragstart="startDrag(event)">BOX-4 <span class="count"></span></div>
+            <div class="item" draggable="true" id="i5" ondragstart="startDrag(event)">BOX-5 <span class="count"></span></div>
+        </div>
+
+        <div class="zone" id="z2" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropIt(event)">
+            <h3>In Progress</h3>
+        </div>
+
+    </div>
+
+    <script>
+        var dragged = null;
+
+        function startDrag(ev) {
+            dragged = ev.target;
+            ev.target.classList.add("dragging");
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.add("over");
+        }
+
+        function leaveDrop(ev) {
+            ev.currentTarget.classList.remove("over");
+        }
+
+        function dropIt(ev) {
+            ev.preventDefault();
+            var id = ev.dataTransfer.getData("text");
+            var el = document.getElementById(id);
+            ev.currentTarget.appendChild(el);
+            el.classList.remove("dragging");
+            ev.currentTarget.classList.remove("over");
+        }
+
+        document.addEventListener("dragend", function(ev) {
+            if (dragged) dragged.classList.remove("dragging");
+        });
+    </script>
+</body>
+
+</html>

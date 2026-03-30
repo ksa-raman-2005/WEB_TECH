@@ -1,0 +1,440 @@
+use country
+switched to db country
+db.zipcodes.aggregate([
+  { $match: { city: "BOSTON" } },
+  { $group: { _id: "$state" } }
+])
+{
+  _id: 'KY'
+}
+{
+  _id: 'PA'
+}
+{
+  _id: 'MA'
+}
+{
+  _id: 'NY'
+}
+{
+  _id: 'TX'
+}
+{
+  _id: 'GA'
+}
+{
+  _id: 'VA'
+}
+db.zipcodes.aggregate([
+  { $match: { city: { $regex: "BOST", $options: "i" } } },
+  { $group: { _id: { state: "$state", city: "$city" } } }
+])
+{
+  _id: {
+    state: 'NC',
+    city: 'BOSTIC'
+  }
+}
+{
+  _id: {
+    state: 'TX',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'MA',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'MA',
+    city: 'SOUTH BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'NH',
+    city: 'NEW BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'NY',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'PA',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'GA',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'IL',
+    city: 'NEW BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'VA',
+    city: 'SOUTH BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'VA',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'MA',
+    city: 'BOSTON COLLEGE'
+  }
+}
+{
+  _id: {
+    state: 'MA',
+    city: 'EAST BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'MO',
+    city: 'NEW BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'KY',
+    city: 'BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'OH',
+    city: 'NEW BOSTON'
+  }
+}
+{
+  _id: {
+    state: 'MI',
+    city: 'NEW BOSTON'
+  }
+}
+db.zipcodes.aggregate([
+  {
+    $group: {
+      _id: { state: "$state", city: "$city" },
+      zip_count: { $sum: 1 },
+      total_pop: { $sum: "$pop" }
+    }
+  }
+])
+{
+  _id: {
+    state: 'MO',
+    city: 'HOLTS SUMMIT'
+  },
+  zip_count: 1,
+  total_pop: 6642
+}
+{
+  _id: {
+    state: 'TX',
+    city: 'INEZ'
+  },
+  zip_count: 1,
+  total_pop: 808
+}
+{
+  _id: {
+    state: 'NE',
+    city: 'RICHLAND'
+  },
+  zip_count: 1,
+  total_pop: 23684
+}
+{
+  _id: {
+    state: 'IA',
+    city: 'ELDORADO'
+  },
+  zip_count: 1,
+  total_pop: 3353
+}
+{
+  _id: {
+    state: 'IL',
+    city: 'HOPEDALE'
+  },
+  zip_count: 1,
+  total_pop: 1355
+}
+{
+  _id: {
+    state: 'AR',
+    city: 'CAVE SPRINGS'
+  },
+  zip_count: 1,
+  total_pop: 1629
+}
+{
+  _id: {
+    state: 'VA',
+    city: 'DUGSPUR'
+  },
+  zip_count: 1,
+  total_pop: 1241
+}
+{
+  _id: {
+    state: 'AL',
+    city: 'DAVISTON'
+  },
+  zip_count: 1,
+  total_pop: 2334
+}
+{
+  _id: {
+    state: 'AL',
+    city: 'SOUTHSIDE'
+  },
+  zip_count: 1,
+  total_pop: 44165
+}
+{
+  _id: {
+    state: 'SD',
+    city: 'PORCUPINE'
+  },
+  zip_count: 1,
+  total_pop: 470
+}
+{
+  _id: {
+    state: 'TN',
+    city: 'HUMBOLDT'
+  },
+  zip_count: 1,
+  total_pop: 13410
+}
+{
+  _id: {
+    state: 'MN',
+    city: 'AUDUBON'
+  },
+  zip_count: 1,
+  total_pop: 1083
+}
+{
+  _id: {
+    state: 'IL',
+    city: 'WHITE HALL'
+  },
+  zip_count: 1,
+  total_pop: 3882
+}
+{
+  _id: {
+    state: 'CO',
+    city: 'CHERRY HILLS VIL'
+  },
+  zip_count: 2,
+  total_pop: 60456
+}
+{
+  _id: {
+    state: 'MA',
+    city: 'WESTON'
+  },
+  zip_count: 1,
+  total_pop: 10221
+}
+{
+  _id: {
+    state: 'TX',
+    city: 'JUSTIN'
+  },
+  zip_count: 1,
+  total_pop: 3422
+}
+{
+  _id: {
+    state: 'CA',
+    city: 'SAN GERONIMO'
+  },
+  zip_count: 1,
+  total_pop: 802
+}
+{
+  _id: {
+    state: 'RI',
+    city: 'BARRINGTON'
+  },
+  zip_count: 1,
+  total_pop: 15849
+}
+{
+  _id: {
+    state: 'GA',
+    city: 'BOWDON'
+  },
+  zip_count: 1,
+  total_pop: 7318
+}
+{
+  _id: {
+    state: 'IL',
+    city: 'PLAINVILLE'
+  },
+  zip_count: 1,
+  total_pop: 986
+}
+Type "it" for more
+db.zipcodes.aggregate([
+  // 1. Group by state and city to get counts
+  {
+    $group: {
+      _id: { state: "$state", city: "$city" },
+      zip_count: { $sum: 1 },
+      total_pop: { $sum: "$pop" }
+    }
+  },
+  // 2. Sort by zip_count descending so the max is on top
+  { $sort: { zip_count: -1 } },
+  // 3. Group by state and pick the first (top) city
+  {
+    $group: {
+      _id: "$_id.state",
+      city: { $first: "$_id.city" },
+      max_zips: { $first: "$zip_count" },
+      total_pop: { $first: "$total_pop" }
+    }
+  },
+  // 4. Rank the resulting states by population
+  { $sort: { total_pop: -1 } }
+])
+{
+  _id: 'IL',
+  city: 'CHICAGO',
+  max_zips: 47,
+  total_pop: 2452177
+}
+{
+  _id: 'CA',
+  city: 'LOS ANGELES',
+  max_zips: 56,
+  total_pop: 2102295
+}
+{
+  _id: 'TX',
+  city: 'HOUSTON',
+  max_zips: 93,
+  total_pop: 2095918
+}
+{
+  _id: 'PA',
+  city: 'PHILADELPHIA',
+  max_zips: 48,
+  total_pop: 1610956
+}
+{
+  _id: 'NY',
+  city: 'NEW YORK',
+  max_zips: 40,
+  total_pop: 1476790
+}
+{
+  _id: 'MI',
+  city: 'DETROIT',
+  max_zips: 26,
+  total_pop: 963243
+}
+{
+  _id: 'AZ',
+  city: 'PHOENIX',
+  max_zips: 33,
+  total_pop: 890853
+}
+{
+  _id: 'FL',
+  city: 'MIAMI',
+  max_zips: 34,
+  total_pop: 825232
+}
+{
+  _id: 'MD',
+  city: 'BALTIMORE',
+  max_zips: 21,
+  total_pop: 733081
+}
+{
+  _id: 'TN',
+  city: 'MEMPHIS',
+  max_zips: 26,
+  total_pop: 632837
+}
+{
+  _id: 'GA',
+  city: 'ATLANTA',
+  max_zips: 31,
+  total_pop: 609591
+}
+{
+  _id: 'DC',
+  city: 'WASHINGTON',
+  max_zips: 23,
+  total_pop: 606879
+}
+{
+  _id: 'NV',
+  city: 'LAS VEGAS',
+  max_zips: 24,
+  total_pop: 597557
+}
+{
+  _id: 'WI',
+  city: 'MILWAUKEE',
+  max_zips: 20,
+  total_pop: 597324
+}
+{
+  _id: 'WA',
+  city: 'SEATTLE',
+  max_zips: 24,
+  total_pop: 520096
+}
+{
+  _id: 'OR',
+  city: 'PORTLAND',
+  max_zips: 26,
+  total_pop: 518543
+}
+{
+  _id: 'LA',
+  city: 'NEW ORLEANS',
+  max_zips: 17,
+  total_pop: 496937
+}
+{
+  _id: 'NC',
+  city: 'CHARLOTTE',
+  max_zips: 24,
+  total_pop: 465833
+}
+{
+  _id: 'CO',
+  city: 'DENVER',
+  max_zips: 22,
+  total_pop: 451182
+}
