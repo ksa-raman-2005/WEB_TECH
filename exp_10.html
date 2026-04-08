@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Shopping Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+        
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #333;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Online Shopping System</h2>
+
+    <button onclick="orderProcess('Smartphone')">
+        Place Order
+    </button>
+
+    <div id="output"></div>
+
+    <script>
+        const outputDiv = document.getElementById("output");
+
+        const showMessage = (message) => {
+            outputDiv.innerHTML += message + "<br>";
+        };
+
+        function placeOrder(product, callback) {
+            showMessage(`Order placed for: ${product}`);
+            callback(product);
+        }
+
+        function processPayment() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve("Payment Successful");
+                }, 2000);
+            });
+        }
+        async function orderProcess(product) {
+            outputDiv.innerHTML = "";
+
+            showMessage("Starting order process...");
+
+            placeOrder(product, (item) => {
+                showMessage(`Order confirmed for: ${item}`);
+            });
+
+            const paymentStatus = await processPayment();
+            showMessage(paymentStatus);
+
+            showMessage("Order will be delivered soon");
+        }
+    </script>
+
+</body>
+
+</html>
